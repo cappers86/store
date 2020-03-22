@@ -1,0 +1,96 @@
+import React, {useState} from 'react';
+import {Typography, Button, Form, message, Input, Icon} from 'antd'
+import FileUpload from '../../utils/FileUpload';
+
+const { Title } = Typography;
+const { TextArea } = Input;
+
+const Continents = [
+    {key: 1, value: "Africa"},
+    {key: 1, value: "Europe"},
+    {key: 1, value: "Asia"},
+    {key: 1, value: "North America"},
+    {key: 1, value: "South America"},
+    {key: 1, value: "Antarctica"}
+]
+
+function UploadProductPage() {
+
+    const [TitleValue, setTitleValue] = useState("")
+    const [DescriptionValue, setDescriptionValue] = useState("")
+    const [PriceValue, setPriceValue] = useState(0)
+    const [ContinentValue, SetContinentValue] = useState(1)
+
+    const onTitleChange = (e) => {
+        setTitleValue(e.currentTarget.value)
+    }
+
+    const onDescriptionChange = (e) => {
+       setDescriptionValue(e.currentTarget.value)
+    }
+
+    const onPriceChange = (e) => {
+        setPriceValue(e.currentTarget.value)
+    }
+
+    const onContinentSelectChange = (e) => {
+        SetContinentValue(e.currentTarget.value)
+    }
+
+    return (
+        <div style={{maxWidth: '700px', margin:'2rem auto'}}>
+            <div style={{textAlign:'center', marginBottom:'2em'}}>
+                <Title level={2}>Upload Travel Product</Title>
+            </div>
+
+            <Form onSubmit>
+            
+            {/* DropZone box */}
+                <FileUpload />
+
+            <br />
+            <br />
+            <label>Title</label>
+            <Input
+                onChange={onTitleChange}
+                value={TitleValue}
+            />
+            <br />
+            <br />
+            <label>Description</label>
+            <TextArea
+            onChange={onDescriptionChange}
+            value={DescriptionValue}
+            />
+            <br />
+            <br />
+            <label>Price($)</label>
+            <Input
+                onChange={onPriceChange}
+                value={PriceValue}
+                type='number'
+            />
+            <select onChange={onContinentSelectChange}>
+
+                {Continents.map(item => (
+                    <option key={item.key} value={item.key}>{item.value}</option>
+                ))}
+                
+            </select>
+            <br />
+            <br />
+            <Button 
+            onClick
+            >
+                Submit
+
+            </Button>
+
+
+            </Form>
+            
+        </div>
+    )
+}
+
+export default UploadProductPage
